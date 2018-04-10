@@ -26,7 +26,9 @@ router
 router
   .route("/:id")
   .get((req, res) => {
-    res.status(200).json({ route: "/api/bears/" + req.params.id });
+    Bear.findById(req.params.id)
+      .then(bear => res.status(200).json(bear))
+      .catch(err => res.status(500).json(err));
   })
   .delete((req, res) => {
     res.status(200).json({ status: "please implement DELETE functionality" });
